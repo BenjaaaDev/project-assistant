@@ -1,6 +1,10 @@
 const voiceCircle = document.getElementById('voiceCircle');
+const microphoneButton = document.getElementById('microphoneButton');
 let isListening = false;
 let recognition = null;
+
+// Inicializar el botón como inactivo
+microphoneButton.classList.add('inactive');
 
 // Verificar si el navegador soporta reconocimiento de voz
 if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -13,6 +17,8 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     recognition.onstart = () => {
         isListening = true;
         voiceCircle.classList.add('listening');
+        microphoneButton.classList.remove('inactive');
+        microphoneButton.classList.add('active');
         console.log('Escuchando...');
     };
 
@@ -26,19 +32,19 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
         console.error('Error en reconocimiento de voz:', event.error);
         isListening = false;
         voiceCircle.classList.remove('listening');
+        microphoneButton.classList.remove('active');
+        microphoneButton.classList.add('inactive');
     };
 
     recognition.onend = () => {
         isListening = false;
         voiceCircle.classList.remove('listening');
-        // Reiniciar automáticamente si estaba escuchando
-        if (isListening) {
-            recognition.start();
-        }
+        microphoneButton.classList.remove('active');
+        microphoneButton.classList.add('inactive');
     };
 
-    // Iniciar reconocimiento al hacer clic
-    voiceCircle.addEventListener('click', () => {
+    // Controlar el micrófono con el botón
+    microphoneButton.addEventListener('click', () => {
         if (!isListening) {
             recognition.start();
         } else {
@@ -47,8 +53,8 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     });
 } else {
     console.warn('Tu navegador no soporta reconocimiento de voz');
-    voiceCircle.style.cursor = 'not-allowed';
-    voiceCircle.addEventListener('click', () => {
+    microphoneButton.style.cursor = 'not-allowed';
+    microphoneButton.addEventListener('click', () => {
         alert('Tu navegador no soporta reconocimiento de voz. Por favor, usa Chrome o Edge.');
     });
 }

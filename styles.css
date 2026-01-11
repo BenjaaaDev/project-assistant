@@ -64,3 +64,67 @@ body {
         opacity: 0.2;
     }
 }
+
+.microphone-button {
+    position: absolute;
+    bottom: 100px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.microphone-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.microphone-button:active {
+    transform: scale(0.95);
+}
+
+.microphone-button.active {
+    background-color: #FFFFFF;
+}
+
+.microphone-button.inactive {
+    background-color: #FF6B6B;
+}
+
+.mic-icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    transition: opacity 0.3s ease;
+}
+
+.active-icon {
+    opacity: 1;
+}
+
+.inactive-icon {
+    opacity: 0;
+}
+
+.microphone-button.active .active-icon {
+    opacity: 1;
+}
+
+.microphone-button.active .inactive-icon {
+    opacity: 0;
+}
+
+.microphone-button.inactive .active-icon {
+    opacity: 0;
+}
+
+.microphone-button.inactive .inactive-icon {
+    opacity: 1;
+}
