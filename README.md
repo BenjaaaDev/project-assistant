@@ -78,9 +78,50 @@ Cuando te pregunte, ingresa tu API key de OpenAI.
 vercel --prod
 ```
 
-### Paso 2: Hacer Deploy
+### Paso 2: Configurar el Proyecto en Vercel
 
-Una vez configurada la variable de entorno, puedes hacer deploy:
+Cuando conectes tu repositorio o crees un nuevo proyecto, Vercel te pedirá configurar:
+
+1. **Framework Preset**: Selecciona **"Other"** o **"Static Site"**
+   - No es necesario un framework específico ya que usamos HTML estático con API routes
+
+2. **Root Directory**: Deja en blanco (o usa `./` si te lo pide)
+
+3. **Build Command**: Deja en blanco o usa:
+   ```
+   npm run build
+   ```
+   (El proyecto no requiere build, pero el comando existe en package.json)
+
+4. **Output Directory**: ⚠️ **IMPORTANTE**: Deja en blanco o usa `.` (punto)
+   - NO pongas `dist`, `build`, `public` u otra carpeta
+   - Los archivos están en la raíz del proyecto
+
+5. **Install Command**: 
+   ```
+   npm install
+   ```
+
+### ⚠️ Si ves un error 404 después del deploy:
+
+1. **Verifica el Output Directory**:
+   - Ve a **Settings** → **General** en tu proyecto de Vercel
+   - Busca "Output Directory"
+   - Debe estar **vacío** o tener solo un punto `.`
+   - Si tiene otra cosa, cámbialo y haz redeploy
+
+2. **Verifica que los archivos estén en la raíz**:
+   - `index.html` debe estar en la raíz del repositorio
+   - No debe estar en una carpeta `public/` o `dist/`
+
+3. **Haz un redeploy**:
+   - Ve a **Deployments** en Vercel
+   - Haz clic en los tres puntos del último deployment
+   - Selecciona **Redeploy**
+
+### Paso 3: Hacer Deploy
+
+Una vez configurada la variable de entorno y el proyecto, puedes hacer deploy:
 
 - **Automático**: Si conectaste tu repositorio, Vercel desplegará automáticamente en cada push
 - **Manual**: Usa `vercel --prod` desde la CLI
