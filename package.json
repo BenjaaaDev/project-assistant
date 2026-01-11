@@ -1,0 +1,20 @@
+{
+  "name": "project-assistant",
+  "version": "1.0.0",
+  "description": "Asistente de voz con IA usando OpenAI",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "@openai/agents": "^0.1.0",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
